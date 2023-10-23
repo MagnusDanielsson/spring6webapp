@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Set;
+
 @Entity
 public class Author {
 
@@ -15,6 +17,8 @@ public class Author {
     private String firstName;
 
     private String lastName;
+
+    private Set<Book> books;
 
     public String getFirstName() {
         return firstName;
