@@ -11,12 +11,16 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
+
     private String location;
+
     @ManyToMany
     private Set<Author> authors;
-    @ManyToMany
-    private Set<Book> books;
+
+    //@ManyToMany
+    //private Set<Book> books;
 
     public Long getId() {
         return id;
@@ -50,11 +54,11 @@ public class Publisher {
         this.authors = authors;
     }
 
-    public Set<Book> getBooks() {
+   /* public Set<Book> getBooks() {
         return books;
     }
 
     public void setBooks(Set<Book> books) {
         this.books = books;
-    }
+    }*/
 }

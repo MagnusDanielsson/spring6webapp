@@ -11,10 +11,14 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
+
     @ManyToMany
     @JoinTable(name = "publisher_author",
         joinColumns = @JoinColumn(name = "publisher_id"),
@@ -52,12 +56,15 @@ public class Author {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public Set<Publisher> getPublishers() {
         return publishers;
     }
+
     public void setPublishers(Set<Publisher> publishers) {
         this.publishers = publishers;
     }
+
     @Override
     public String toString() {
         return "Author{" +
@@ -75,9 +82,11 @@ public class Author {
 
         return getId() != null ? getId().equals(author.getId()) : author.getId() == null;
     }
+
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
     }
+
 }
 

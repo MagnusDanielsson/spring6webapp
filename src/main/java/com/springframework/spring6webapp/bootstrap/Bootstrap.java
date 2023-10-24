@@ -24,23 +24,43 @@ public class Bootstrap implements CommandLineRunner {
         Author magnus = new Author();
         magnus.setFirstName("Magnus");
         magnus.setLastName("Danielsson");
+        Author magnusPersisted = authorRepository.save(magnus);
+
+        Author stephen = new Author();
+        stephen.setFirstName("Stephen");
+        stephen.setLastName("King");
+        Author stephenPersisted = authorRepository.save(stephen);
+
+        Author bram = new Author();
+        bram.setFirstName("Bram");
+        bram.setLastName("Stoker");
+        Author bramPersisted = authorRepository.save(bram);
 
         Book ddd = new Book();
         ddd.setTitle("Domain Driven Design");
         ddd.setIsbn("122479028");
+        Book dddPersisted= bookRepository.save(ddd);
 
-        Author magnusSaved = authorRepository.save(magnus);
-        Book dddSaved= bookRepository.save(ddd);
+        Book sfg = new Book();
+        sfg.setTitle("Spring Frameworg Guru");
+        sfg.setIsbn("947759020");
+        Book sfgPersisted = bookRepository.save(sfg);
 
-        magnusSaved.getBooks().add(dddSaved);
-        //dddSaved.getAuthors().add(magnusSaved);
+        Book dracula = new Book();
+        dracula.setTitle("Dracula");
+        dracula.setIsbn("928749843");
 
-        magnusSaved= authorRepository.save(magnusSaved);
-        //dddSaved = bookRepository.save(dddSaved);
+        magnusPersisted.getBooks().add(dddPersisted);
+        magnusPersisted.getBooks().add(sfgPersisted);
+        authorRepository.save(magnusPersisted);
+
+        bramPersisted.getBooks().add(dracula);
+        authorRepository.save(bramPersisted);
 
         System.out.println("In Bootstrap");
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
 
     }
+
 }
