@@ -8,6 +8,8 @@ import com.springframework.spring6webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class Bootstrap implements CommandLineRunner {
 
@@ -49,17 +51,30 @@ public class Bootstrap implements CommandLineRunner {
         Book dracula = new Book();
         dracula.setTitle("Dracula");
         dracula.setIsbn("928749843");
+        Book draculaPersisted= bookRepository.save(dracula);
+
+        Book missBetty = new Book();
+        missBetty.setTitle("Miss Betty");
+        missBetty.setIsbn("9937474992");
+        Book missBettyPersisted = bookRepository.save(missBetty);
 
         magnusPersisted.getBooks().add(dddPersisted);
         magnusPersisted.getBooks().add(sfgPersisted);
         authorRepository.save(magnusPersisted);
 
-        bramPersisted.getBooks().add(dracula);
+        bramPersisted.getBooks().add(draculaPersisted);
+        bramPersisted.getBooks().add(missBettyPersisted);
         authorRepository.save(bramPersisted);
+
+        //draculaPersisted.getAuthors().add(bramPersisted);
+        Set<Book> b = bramPersisted.getBooks();
 
         System.out.println("In Bootstrap");
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
+
+        b.forEach(System.out::println);
+
 
     }
 
