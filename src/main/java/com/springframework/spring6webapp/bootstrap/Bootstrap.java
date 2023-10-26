@@ -2,13 +2,12 @@ package com.springframework.spring6webapp.bootstrap;
 
 import com.springframework.spring6webapp.domain.Author;
 import com.springframework.spring6webapp.domain.Book;
+import com.springframework.spring6webapp.domain.Publisher;
 import com.springframework.spring6webapp.repositories.AuthorRepository;
 import com.springframework.spring6webapp.repositories.BookRepository;
 import com.springframework.spring6webapp.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
 
 @Component
 public class Bootstrap implements CommandLineRunner {
@@ -21,6 +20,7 @@ public class Bootstrap implements CommandLineRunner {
         this.bookRepository = bookRepository;
         this.publisherRepository = publisherRepository;
     }
+
     @Override
     public void run(String... args) throws Exception {
         Author magnus = new Author();
@@ -66,15 +66,14 @@ public class Bootstrap implements CommandLineRunner {
         bramPersisted.getBooks().add(missBettyPersisted);
         authorRepository.save(bramPersisted);
 
-        //draculaPersisted.getAuthors().add(bramPersisted);
-        Set<Book> b = bramPersisted.getBooks();
+        Publisher bonnier = new Publisher();
+        bonnier.setLocation("Sweden");
+        bonnier.setName("Bonnier");
+        Publisher bonnierPersisted = publisherRepository.save(bonnier);
 
         System.out.println("In Bootstrap");
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
-
-        b.forEach(System.out::println);
-
 
     }
 

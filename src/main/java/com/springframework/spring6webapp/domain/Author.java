@@ -19,11 +19,6 @@ public class Author {
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "publisher_author",
-        joinColumns = @JoinColumn(name = "publisher_id"),
-        inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Publisher> publishers = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -55,14 +50,6 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<Publisher> getPublishers() {
-        return publishers;
-    }
-
-    public void setPublishers(Set<Publisher> publishers) {
-        this.publishers = publishers;
     }
 
     @Override

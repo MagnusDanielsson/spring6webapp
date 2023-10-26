@@ -17,10 +17,7 @@ public class Publisher {
     private String location;
 
     @ManyToMany
-    private Set<Author> authors;
-
-    //@ManyToMany
-    //private Set<Book> books;
+    private Set<Book> books;
 
     public Long getId() {
         return id;
@@ -45,20 +42,10 @@ public class Publisher {
     public void setLocation(String location) {
         this.location = location;
     }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
-
-   /* public Set<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
-
     public void setBooks(Set<Book> books) {
         this.books = books;
-    }*/
+    }
 }
