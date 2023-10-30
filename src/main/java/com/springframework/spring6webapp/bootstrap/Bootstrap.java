@@ -28,16 +28,6 @@ public class Bootstrap implements CommandLineRunner {
         magnus.setLastName("Danielsson");
         Author magnusPersisted = authorRepository.save(magnus);
 
-        Author stephen = new Author();
-        stephen.setFirstName("Stephen");
-        stephen.setLastName("King");
-        Author stephenPersisted = authorRepository.save(stephen);
-
-        Author bram = new Author();
-        bram.setFirstName("Bram");
-        bram.setLastName("Stoker");
-        Author bramPersisted = authorRepository.save(bram);
-
         Book ddd = new Book();
         ddd.setTitle("Domain Driven Design");
         ddd.setIsbn("122479028");
@@ -48,32 +38,29 @@ public class Bootstrap implements CommandLineRunner {
         sfg.setIsbn("947759020");
         Book sfgPersisted = bookRepository.save(sfg);
 
-        Book dracula = new Book();
-        dracula.setTitle("Dracula");
-        dracula.setIsbn("928749843");
-        Book draculaPersisted= bookRepository.save(dracula);
-
-        Book missBetty = new Book();
-        missBetty.setTitle("Miss Betty");
-        missBetty.setIsbn("9937474992");
-        Book missBettyPersisted = bookRepository.save(missBetty);
-
-        magnusPersisted.getBooks().add(dddPersisted);
-        magnusPersisted.getBooks().add(sfgPersisted);
-        authorRepository.save(magnusPersisted);
-
-        bramPersisted.getBooks().add(draculaPersisted);
-        bramPersisted.getBooks().add(missBettyPersisted);
-        authorRepository.save(bramPersisted);
-
         Publisher bonnier = new Publisher();
         bonnier.setLocation("Sweden");
         bonnier.setName("Bonnier");
         Publisher bonnierPersisted = publisherRepository.save(bonnier);
 
+        dddPersisted.setPublisher(bonnierPersisted);
+        sfgPersisted.setPublisher(bonnierPersisted);
+
+        dddPersisted.getAuthors().add(magnusPersisted);
+        sfgPersisted.getAuthors().add(magnusPersisted);
+
+        magnusPersisted.getBooks().add(dddPersisted);
+        magnusPersisted.getBooks().add(sfgPersisted);
+
+        bookRepository.save(dddPersisted);
+        bookRepository.save(sfgPersisted);
+        authorRepository.save(magnusPersisted);
+        publisherRepository.save(bonnierPersisted);
+
         System.out.println("In Bootstrap");
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
+        System.out.println("Publisher count: " + publisherRepository.count());
 
     }
 

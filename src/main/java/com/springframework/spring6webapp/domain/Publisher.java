@@ -16,7 +16,7 @@ public class Publisher {
 
     private String location;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "publisher")
     private Set<Book> books;
 
     public Long getId() {
