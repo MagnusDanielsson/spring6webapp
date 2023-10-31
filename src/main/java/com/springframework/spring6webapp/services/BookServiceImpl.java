@@ -17,4 +17,5 @@ public class BookServiceImpl implements BookService {
     public Iterable<Book> findAll() {
         return bookRepository.findAll();
     }
+
 }
